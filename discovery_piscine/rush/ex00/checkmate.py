@@ -32,7 +32,8 @@ def checkmate(board):
 
     for row in table:
         if len(row) != size:
-            return "failed"
+            print("Fail")
+            return "Fail"
 
     occupied = {}
     for r in range(size):
@@ -41,7 +42,8 @@ def checkmate(board):
                 occupied[(r, c)] = table[r][c]
 
     if "K" not in occupied.values():
-        return "failed"
+        print("Fail")
+        return "Fail"
 
     p_can = 0
     b_can = 0
@@ -58,6 +60,8 @@ def checkmate(board):
         q_can = scan(occupied, "Q", STRAIGHT + DIAGONAL, size)
 
     if p_can + b_can + r_can + q_can > 0:
-        return "success"
-    return "failed"
+        print("Success")
+        return "Success"
+    print("Fail")
+    return "Fail"
 
