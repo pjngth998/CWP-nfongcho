@@ -1,23 +1,23 @@
 def scan(occupied, me, directions, size, max_steps=None):
-    for (r, c), name in occupied.items():
-        if name == me:
-            row = r
-            col = c
-
     if max_steps is None:
         max_steps = size
 
-    for step in range(1, max_steps + 1):
-        found_other = False
-        for dr, dc in directions:
-            r = row + dr * step
-            c = col + dc * step
-            if 0 <= r < size and 0 <= c < size and (r, c) in occupied:
-                if occupied[(r, c)] == "K":
-                    return 1
-                found_other = True
-        if found_other:
-            return 0
+    for (row, col), name in occupied.items():
+        if name != me:
+            continue
+
+        for step in range(1, max_steps + 1):
+            found_other = False
+            for dr, dc in directions:
+                r = row + dr * step
+                c = col + dc * step
+                if 0 <= r < size and 0 <= c < size and (r, c) in occupied:
+                    if occupied[(r, c)] == "K":
+                        return 1
+                    found_other = True
+            if found_other:
+                break      
+
     return 0
 
 
